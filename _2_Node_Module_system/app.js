@@ -1,5 +1,3 @@
-const endpoint = require('./logger');
-const functioning = require('./logger');
-
-console.log(functioning)
-console.log(endpoint)
+const path = require('path')
+const endrslt = path.parse(__dirname +"|------|"+ __filename)
+console.log(endrslt)
