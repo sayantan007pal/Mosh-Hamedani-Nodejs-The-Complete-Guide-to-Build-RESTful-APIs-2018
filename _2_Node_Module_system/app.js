@@ -1,3 +1,11 @@
-const path = require('path')
-const endrslt = path.parse(__dirname +"|------|"+ __filename)
-console.log(endrslt)
+
+const os = require('os')
+
+var totalMemory = os.totalmem()
+var freeMemory = os.freemem()
+console.log("Total Memory: " + totalMemory + "     Free Memory: " + freeMemory)
+
+
+//Template string 
+console.log(`Total Memory: ${totalMemory} `)
+console.log(`Free Memory: ${freeMemory} `)
