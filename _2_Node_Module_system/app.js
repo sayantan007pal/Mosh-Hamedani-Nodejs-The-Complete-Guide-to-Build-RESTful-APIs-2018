@@ -1,11 +1,8 @@
+const fs = require("fs");
 
-const os = require('os')
-
-var totalMemory = os.totalmem()
-var freeMemory = os.freemem()
-console.log("Total Memory: " + totalMemory + "     Free Memory: " + freeMemory)
-
-
-//Template string 
-console.log(`Total Memory: ${totalMemory} `)
-console.log(`Free Memory: ${freeMemory} `)
+fs.readdir('./',function(err, files) { // always use asynchronous method as node is single threaded so on using "readdirSync" the process would be blocking the other operations untill it completes 
+    if (err) {console.log('ERROR', err); return;}
+    else {
+        console.log("NAME OF FILES ARE : ", files);
+    }
+})
