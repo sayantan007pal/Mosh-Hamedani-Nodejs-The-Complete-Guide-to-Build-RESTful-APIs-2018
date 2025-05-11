@@ -1,8 +1,12 @@
-const fs = require("fs");
+const EventEmitter = require("events"); //EventEmitter is a class like -Human and 'E' in EventEmitter in the beginning signifies it is a "Class"
 
-fs.readdir('./',function(err, files) { // always use asynchronous method as node is single threaded so on using "readdirSync" the process would be blocking the other operations untill it completes 
-    if (err) {console.log('ERROR', err); return;}
-    else {
-        console.log("NAME OF FILES ARE : ", files);
-    }
-})
+const emitter = new EventEmitter(); //event is a object like - John i.e human name
+
+
+//register a listener
+emitter.on('messageLogged', function(){
+    console.log("Listener called ");
+})//emitter.addListener('Name of event','Callback function or Listener') same as emitter.on()
+
+//raised an event
+emitter.emit('messageLogged')// here .event signifies a noise that something has happened where 'messageLogged' is the name of the event
