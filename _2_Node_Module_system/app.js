@@ -5,8 +5,8 @@ const emitter = new EventEmitter(); //event is a object like - John i.e human na
 
 //register a listener
 emitter.on('messageLogged', function(){
-    console.log("Listener called ");
+    console.log("Listener called ");  //"Listener called " output signifies when " emitter.emit('messageLogged', {id:1, url: 'http://'}) " this event is raised , " emitter.on('messageLogged', function() " this callback function is called
 })//emitter.addListener('Name of event','Callback function or Listener') same as emitter.on()
 
 //raised an event
-emitter.emit('messageLogged')// here .event signifies a noise that something has happened where 'messageLogged' is the name of the event
+emitter.emit('messageLogged', {id:1, url: 'http://'})//"event arguments are stored in a object"
