@@ -1,21 +1,21 @@
-const EventEmitter = require('events'); //EventEmitter is a class like -Human and 'E' in EventEmitter in the beginning signifies it is a "Class"
+const http = require("http");
+const server = http.createServer((req, res) =>{
+    if(req.url ==='/'){
+        res.write('Hello World');
+        res.end();
+    }
+    if(req.url ==='/api'){
+        res.write(JSON.stringify([1,3,5,7,94,200])); // would return json response in the form of string
+        res.end();
+    }
+});  // this server has all the capabilities of a event emitter
+
+//event handler
+server.on('connection', (socket) => {
+    console.log("New connection ....");
+});
+server.listen(3001)
+
+console.log("Listening on port 3001");
 
 
-
-
-
-
-const Logger = require("./logger");
-const logger = new Logger();
-
-
-//register a listener
-logger.on('messageLogged', (arg)=>{
-    console.log("Listener called ", arg);  //"Listener called " output signifies when " emitter.emit('messageLogged', {id:1, url: 'http://'}) " this event is raised , " emitter.on('messageLogged', function() " this callback function is called
-})//emitter.addListener('Name of event','Callback function or Listener') same as emitter.on()
-
-
-
-
-logger.log();      //message   Listener called  { id: 1, url: 'http://' }
-logger.log('mgdsrt');  //message    Listener called  { id: 1, url: 'http://' }
