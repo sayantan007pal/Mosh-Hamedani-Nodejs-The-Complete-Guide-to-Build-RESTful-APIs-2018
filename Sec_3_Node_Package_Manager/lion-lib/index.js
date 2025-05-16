@@ -1,0 +1,1 @@
+module.exports.mul = function(num) {return num*num};
