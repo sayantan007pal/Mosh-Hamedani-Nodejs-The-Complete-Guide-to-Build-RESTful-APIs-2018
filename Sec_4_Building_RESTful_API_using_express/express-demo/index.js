@@ -80,7 +80,7 @@ app.post("/api/courses", (req,res)=>{
             */
             
             
-             res.status(400).send(result.error.details[0].message);  
+            res.status(400).send(result.error.details[0].message);  
             
             /*
             INPUT
@@ -118,6 +118,53 @@ output
 }
 */ 
 
+app.put("/api/courses/:id", (req,res)=>{
+    /*
+    Look up the course
+    If not existing return 404
+
+    Validate
+    If invalid, return 400 -Bad request
+
+    Update course
+    Return the updated course
+    */
+    
+    const course = courses.find(c => c.id === parseInt(req.params.id));
+    if (!course) {
+        res.status(404).send("The course with a given id was not found.");
+    }
+
+    const result = validateCourse(req.body);
+
+    if (result.error) 
+    {
+        res.status(400).send(result.error.details[0].message); 
+        return;
+
+    }
+    course.name = req.body.name;
+    res.send(course);
+    /*
+    INPUT
+    "name":"new ditinct course"
+    
+    OUTPUT
+    {
+    "id": 1,
+    "name": "new ditinct course"
+    }
+    */ 
+});
+
+function validateCourse(course){
+    const schema =  Joi.object({         // Here, Joi.object({...}) creates a schema object that specifies the expected structure and validation rules for the request body.
+        name: Joi.string().min(3).required()    //It specifies that the name field must be a string, must have at least 3 characters (min(3)), and is required (required()). If the incoming request body does not include a name property, or if the value is not a string with at least 3 characters, Joi will return a validation error. 
+    });
+
+    return schema.validate(course);
+
+};
 
 //dynamic PORT
 const port = process.env.PORT || 3000;
